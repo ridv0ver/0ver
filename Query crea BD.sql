@@ -1,0 +1,10 @@
+create database bd0ver;
+use bd0ver;
+create table usuarios(Clave_id Int, Usuario varchar(12), clave varchar(50), PoA Int, PRIMARY KEY (Clave_id));
+select * from usuarios;
+INSERT INTO usuarios VALUES (1,'19594216-1','1432',1);
+INSERT INTO usuarios VALUES (2,'20166836-0','pepetulagrande',0);
+create table resultados(Usuario varchar(12), nombrePrueba varchar(50), Nota Int, PRIMARY KEY(Usuario));
+select * from resultados;
+drop table resultados;
+create table resultados(id Int, Usuario varchar(12), nombrePrueba varchar(50), porcentaje double, PRIMARY KEY(id));

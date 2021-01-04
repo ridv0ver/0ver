@@ -1,6 +1,4 @@
 package src.engine.core;
-
-import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
@@ -44,37 +42,19 @@ public class SelecMulPregunta extends Pregunta{ //begin SelecMulPregunta.java
     }
     //metodo heredado
     @Override
-    public boolean buscar(String enunciado) {
-        System.out.println(enunciado);
-        int contador = 0;
-        while(contador<conjuntoSolucion.size()){
-            System.out.println("\t"+conversorAlternativa.conversor(contador+1)+")"+conjuntoSolucion.get(contador));
-            contador = contador + 1;
-        }
-        String respuesta;
-        System.out.println("ingrese la alternativa que ud crea correcta a continuación.");
-        Scanner text = new Scanner(System.in);
-        respuesta = text.nextLine();
-        int intentos = 1;
-        while(esValido(respuesta)==false && intentos < 4){
-           System.out.println("ingrese una opción válida.");
-           text = new Scanner(System.in);
-           respuesta = text.nextLine();
-           intentos = intentos + 1;
-        }
-        if(intentos>=4){
-            text.close();
-            fuerzaCierre();
-        }
+    public boolean buscar(String respuesta) {
         if(alternativaCorrecta.equalsIgnoreCase(respuesta)==true){
             System.out.println("Respuesta correcta!");
-            text.close();
             return true;
         }else{
             System.out.println("Respuesta errónea,la alternativa correcta era: "+alternativaCorrecta);
-            text.close();
             return false;
         }
+    }
+
+    @Override
+    public int retornaTipo() {
+        return 2;
     }
     
 }//end SelecMulPregunta.java

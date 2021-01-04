@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
+import src.engine.resultadosTest;
+import src.engine.verTestArchivo;
+
 public class adminProfesor extends JFrame implements ActionListener {
 
     /**
@@ -14,7 +17,7 @@ public class adminProfesor extends JFrame implements ActionListener {
      */
     private static final long serialVersionUID = 1L;
 
-    JButton btn1,btn2,btn3,btn4,salir;
+    JButton btn1,btn2,btn3,btn4,btn5,salir;
     JLabel marca;
 
     public adminProfesor(){
@@ -48,20 +51,25 @@ public class adminProfesor extends JFrame implements ActionListener {
         btn4.setBounds(25,400,500,75);
         btn4.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,30));
         btn4.addActionListener(this);
+        //boton revisar resultados evaluaciones
+        btn5 = new JButton("ve resultados evaluaciones");
+        btn5.setBounds(650,25,500,75);
+        btn5.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,30));
+        btn5.addActionListener(this);
         //boton de salir
         salir = new JButton("Salir!");
         salir.setBounds(800,300,300,200);
         salir.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,40));
         salir.addActionListener(this);
         //marca
-        marca = new JLabel("Over 2020 v0.1");
-        marca.setBounds(1075,500,100,100);
-        marca.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,15));  
+        constantes n = new constantes();
+        marca = n.generaMarca();  
         //carga de complementos a la ventana
         add(btn1);
         add(btn2);
         add(btn3);
         add(btn4);
+        add(btn5);
         add(marca);
         add(salir);
     }
@@ -70,6 +78,20 @@ public class adminProfesor extends JFrame implements ActionListener {
         if(e.getSource()==salir){//volvemos al principio
             dispose();
             ventanaPrincipal ventana = new ventanaPrincipal();
+            ventana.setVisible(true);
+        }else if(e.getSource()==btn1){
+            dispose();
+            verTestArchivo ventana = new verTestArchivo();
+            ventana.setVisible(true);
+        }else if(e.getSource()==btn2){
+            
+        }else if(e.getSource()==btn3){
+            
+        }else if(e.getSource()==btn4){
+            
+        }else if(e.getSource()==btn5){
+            dispose();
+            resultadosTest ventana = new resultadosTest();
             ventana.setVisible(true);
         }
 

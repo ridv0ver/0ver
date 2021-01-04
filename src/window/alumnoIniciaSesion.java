@@ -1,6 +1,7 @@
 package src.window;
 
 import javax.swing.*;
+import src.processor.dataBaseController;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class alumnoIniciaSesion extends JFrame implements ActionListener {
     JButton creaCuenta;
     JButton continuar;
     JLabel marca;
+    JButton retornar;
     public alumnoIniciaSesion(){
         setTitle("Over");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,10 +54,15 @@ public class alumnoIniciaSesion extends JFrame implements ActionListener {
         creaCuenta.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,30));
         creaCuenta.addActionListener(this);
         //marca
-        marca = new JLabel("Over 2020 v0.1");
-        marca.setBounds(1075,500,100,100);
-        marca.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,15));  
+        retornar = new JButton("retornar");
+        retornar.setBounds(25,300,300,50);
+        retornar.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,30));
+        retornar.addActionListener(this);
+        //boton retornar
+        constantes n = new constantes();
+        marca = n.generaMarca();
         //carga de complementos a la ventana
+        add(retornar);
         add(creaCuenta);
         add(continuar);
         add(texto1);
@@ -69,17 +76,20 @@ public class alumnoIniciaSesion extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==creaCuenta){
             dispose();
-            registraCuenta ventana = new registraCuenta();
+            registraCuenta ventana = new registraCuenta(0);
             ventana.setVisible(true);
         }else if(e.getSource()==continuar){
-            //String scontraseña = clave.getText();
-            //String susuario = usuario.getText();
-                
-            //operación exitosa
-            
+            dataBaseController m = new dataBaseController();
+            if(m.isValid(usuario.getText(), clave.getText(),0)==1){
+                //operación exitosa
+                dispose();
+                adminAlumno ventana = new adminAlumno(usuario.getText());
+                ventana.setVisible(true);
+            } 
+        }else if(e.getSource()==retornar){
             dispose();
-            adminAlumno ventana = new adminAlumno();
-            ventana.setVisible(true); 
+            ventanaPrincipal ventana = new ventanaPrincipal();
+            ventana.setVisible(true);
         }
 
     }

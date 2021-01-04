@@ -56,4 +56,5 @@ public abstract class Pregunta { //begin Pregunta.java
      * @return boolean  
      */
     public abstract boolean buscar(String enunciado);
+    public abstract int retornaTipo();
 }//end Pregunta.Java

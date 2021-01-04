@@ -1,5 +1,7 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "driver-connector/lucene-core-3.6.2.jar",
+        "driver-connector/mysql-connector-java-5.1.49.jar"
     ]
 }

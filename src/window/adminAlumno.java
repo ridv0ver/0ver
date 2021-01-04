@@ -1,6 +1,7 @@
 package src.window;
 
 import javax.swing.*;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +11,13 @@ public class adminAlumno extends JFrame implements ActionListener {
      *
      */
     private static final long serialVersionUID = 1L;
+    String usuario;
     JButton btn1, btn2, btn3, btn4;
     JButton salir;
     JLabel marca;
     
-    public adminAlumno(){
+    public adminAlumno(String nombreUsuario){
+        this.usuario = nombreUsuario;
         setTitle("Over");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -45,9 +48,8 @@ public class adminAlumno extends JFrame implements ActionListener {
         salir.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,40));
         salir.addActionListener(this);
         //marca
-        marca = new JLabel("Over 2020 v0.1");
-        marca.setBounds(1075,500,100,100);
-        marca.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,15));
+        constantes n = new constantes();
+        marca = n.generaMarca();
         //cargar los complementos a la ventana
         add(btn1);
         add(btn2);
@@ -62,7 +64,23 @@ public class adminAlumno extends JFrame implements ActionListener {
             dispose();
             ventanaPrincipal ventana = new ventanaPrincipal();
             ventana.setVisible(true);
+        }else if(e.getSource()==btn2){
+            dispose();
+            cargaPruebas ventana = new cargaPruebas(usuario);
+            ventana.setVisible(true);
+        }else if(e.getSource()==btn1){
+            dispose();
+            AlumnoResultadosYPruebas ventana = new AlumnoResultadosYPruebas(usuario);
+            ventana.setVisible(true);
+        }else if(e.getSource()==btn3){
+            //System.out.println(usuario);
+            dispose();
+            resultadosAlumno ventana = new resultadosAlumno(getUsuario());
+            ventana.setVisible(true);
         }
     }
-    
+    private String getUsuario(){
+        return usuario;
+    }
 }
+

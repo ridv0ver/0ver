@@ -14,6 +14,7 @@ public class ventanaPrincipal extends JFrame implements ActionListener {
 
     JButton botonprofesor;
     JButton botonalumno;
+    JButton debug;
     JLabel marca;
 
     public ventanaPrincipal(){
@@ -44,14 +45,19 @@ public class ventanaPrincipal extends JFrame implements ActionListener {
           botonalumno.setForeground(Color.WHITE);
           botonalumno.setBackground(Color.RED);
           botonalumno.addActionListener(this);
+        //boton debug
+        debug = new JButton("dev");
+        debug.setBounds(500, 500, 200, 50);
+        debug.addActionListener(this);
+        debug.setFont(new Font("Yu Gothic UI Semilight",Font.BOLD,20));
         //marca
-          marca = new JLabel("Over 2020 v0.1");
-          marca.setBounds(1075,500,100,100);
-          marca.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,15));  
+        constantes n = new constantes();
+        marca = n.generaMarca();  
         //carga de complementos a la ventana  
           add(marca);
           add(botonprofesor);
           add(botonalumno);
+          add(debug);
     }
 
     @Override
@@ -64,6 +70,10 @@ public class ventanaPrincipal extends JFrame implements ActionListener {
             dispose();
             alumnoIniciaSesion ventana = new alumnoIniciaSesion();
             ventana.setVisible(true);
+        }else if(e.getSource()==debug){
+            dispose();
+            ventanaDebug ventana = new ventanaDebug();
+            ventana.debugger();
         }
     }
     

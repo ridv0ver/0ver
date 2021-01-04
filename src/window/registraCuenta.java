@@ -9,20 +9,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 
+import src.processor.dataBaseController;
+
 public class registraCuenta extends JFrame implements ActionListener{
     /**
      *
      */
     private static final long serialVersionUID = 1L;
-
+    int PoA;
     // JRadioButton PoA1,PoA2;
+    JLabel panelError;
     JLabel texto1, texto2, texto3;
     JTextField usuario;
     JPasswordField clave;
     JPasswordField confirmacionclave;
     JButton boton;
     JLabel marca;
-    public registraCuenta(){
+    public registraCuenta(int profesoroAlumno){
+        this.PoA = profesoroAlumno;
         setTitle("Over");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -65,12 +69,16 @@ public class registraCuenta extends JFrame implements ActionListener{
         PoA2 = new JRadioButton("Alumno");
         PoA2.setBounds(25,100,100,100);*/
         //marca
-        marca = new JLabel("Over 2020 v0.1");
-        marca.setBounds(1075,500,100,100);
-        marca.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,15));  
+        constantes n = new constantes();
+        marca = n.generaMarca();
+        //panel error clave
+        panelError = new JLabel("contraseñas no coinciden!");
+        panelError.setBounds(800,150,300,100);
+        panelError.setFont(new Font("Yu Gothic UI Semilight",Font.PLAIN,20));
+        panelError.setVisible(false);
+        
         //carga de complementos a la ventana
-        //add(PoA1);
-        //add(PoA2);
+        add(panelError);
         add(marca);
         add(texto1);
         add(texto2);
@@ -84,9 +92,15 @@ public class registraCuenta extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
-            dispose();
-            ventanaPrincipal ventana = new ventanaPrincipal();
-            ventana.setVisible(true);
+            if(confirmacionclave.getText().equalsIgnoreCase(clave.getText())==false){
+                panelError.setVisible(true);
+            }else{
+                dataBaseController m = new dataBaseController();
+                m.agregaUsuario(usuario.getText(), clave.getText(), PoA);
+                dispose();
+                ventanaPrincipal ventana = new ventanaPrincipal();
+                ventana.setVisible(true);    
+            }
         }catch(Exception err){
         
         }
